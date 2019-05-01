@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using ToDoList.Models;
+using PackerTracker.Models;
 using System.Collections.Generic;
 
-namespace ToDoList.Controllers
+namespace PackerTracker.Controllers
 {
   public class ItemsController : Controller
   {
@@ -38,6 +38,14 @@ namespace ToDoList.Controllers
     {
       Item item = Item.Find(id);
       return View(item);
+    }
+
+    [HttpPost("/items/{id}")]
+    public ActionResult Pack(int id)
+    {
+      Item item = Item.Find(id);
+      item.SetPacked();
+      return RedirectToAction("Show",id);
     }
   }
 }
